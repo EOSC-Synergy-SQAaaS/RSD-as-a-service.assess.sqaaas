@@ -1,0 +1,76 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/research-software-directory/RSD-as-a-service:
+      branch: main
+      repo: https://github.com/research-software-directory/RSD-as-a-service
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service git:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-buff-wasp.sh
+        container: qc.acc_lousy-cerise-audemer
+  QC.Doc:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-plum-quokka.sh
+        container: qc.doc_nippy-fuchsia-wolverine
+      github.com/research-software-directory/RSD-as-a-service git:
+        commands:
+        - /usr/bin/env sh .sqa/script.lumpy-cardinal-duck.sh
+        container: qc.doc_stuffy-buff-stoat
+      github.com/research-software-directory/RSD-as-a-service markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-firebrick-millipede.sh
+        container: qc.doc_blurry-pink-bobcat
+  QC.Lic:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-brass-mongoose.sh
+        container: qc.lic_lumpy-goldenrod-bombay
+  QC.Met:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-pink-caiman.sh
+        container: qc.met_woozy-amaranth-giraffe
+  QC.Sec:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-peach-peccary.sh
+        container: qc.sec_skanky-pink-slug
+  QC.Sty:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-sapphire-caterpillar.sh
+        container: qc.sty_skimpy-cerulean-ladybird
+      github.com/research-software-directory/RSD-as-a-service flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-lime-macaque.sh
+        container: qc.sty_shaggy-sapphire-jellyfish
+      github.com/research-software-directory/RSD-as-a-service hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-copper-hyena.sh
+        container: qc.sty_pokey-scarlet-tiger
+      github.com/research-software-directory/RSD-as-a-service jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-plum-seal.sh
+        container: qc.sty_tacky-wisteria-wombat
+  QC.Ver:
+    repos:
+      github.com/research-software-directory/RSD-as-a-service get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.smelly-apricot-chin.sh
+        container: qc.ver_jumpy-lime-capybara
+timeout: 5400
